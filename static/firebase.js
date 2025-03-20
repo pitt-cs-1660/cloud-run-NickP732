@@ -117,10 +117,25 @@ async function vote(team) {
     try {
       const token = await createIdToken();
 
-      /*
-       * ++++ YOUR CODE HERE ++++
-       */
-      window.alert(`Not implemented yet!`);
+      const formData = new URLSearchParams();
+      formData.append("team", team);
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/x-www-form-urlencoded",
+          "Authorization" : `Bearer ${token}`
+        },
+        body : formData
+      
+      });
+
+      if(response.ok){
+        window.alert("Vote Successful!")
+      }else{
+        window.alert("Failed to Count Vote.")
+      }
+      
 
     } catch (err) {
       console.log(`Error when submitting vote: ${err}`);
